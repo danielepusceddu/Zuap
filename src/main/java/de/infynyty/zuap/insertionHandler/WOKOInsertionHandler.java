@@ -23,7 +23,7 @@ public class WOKOInsertionHandler extends InsertionHandler<WOKOInsertion> {
         final Dotenv dotenv,
         final String logPrefix
     ) {
-        super(jda, dotenv, logPrefix);
+        super(jda, dotenv, logPrefix, Long.parseLong(dotenv.get("WOKO_CHANNEL_ID")));
     }
 
     @Override

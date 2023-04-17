@@ -18,7 +18,7 @@ import java.util.ArrayList;
 @Log
 public class WGZimmerHandler extends InsertionHandler<WGZimmerInsertion> {
     public WGZimmerHandler(final JDA jda, final Dotenv dotenv, final String logPrefix) {
-        super(jda, dotenv, logPrefix);
+        super(jda, dotenv, logPrefix, Long.parseLong(dotenv.get("WGZIMMER_CHANNEL_ID")));
     }
 
     //TODO: Make it possible to change search variables

@@ -32,6 +32,8 @@ public abstract class InsertionHandler<Insertion extends de.infynyty.zuap.insert
     private final Dotenv dotenv;
     @NotNull
     private final String logPrefix;
+    @NotNull
+    private final long channelId;
 
     /**
      * Creates an insertion handler for a new website.
@@ -40,10 +42,11 @@ public abstract class InsertionHandler<Insertion extends de.infynyty.zuap.insert
      * @param dotenv     The file containing environment variables.
      * @param logPrefix
      */
-    protected InsertionHandler(@NotNull final JDA jda, @NotNull final Dotenv dotenv, @NotNull final String logPrefix) {
+    protected InsertionHandler(@NotNull final JDA jda, @NotNull final Dotenv dotenv, @NotNull final String logPrefix, long channelId) {
         this.jda = jda;
         this.dotenv = dotenv;
         this.logPrefix = logPrefix;
+        this.channelId = channelId;
     }
 
     /**
@@ -132,8 +135,8 @@ public abstract class InsertionHandler<Insertion extends de.infynyty.zuap.insert
                 currentInsertions.add(updatedInsertion);
                 logUpdates(
                     Level.INFO,
-                    "New insertion found:\n\n" + updatedInsertion.toString(),
-                    Zuap.getMainChannelId()
+                    this.logPrefix + "new insertion found\n\n" + updatedInsertion.toString(),
+                    this.channelId
                 );
             }
         }

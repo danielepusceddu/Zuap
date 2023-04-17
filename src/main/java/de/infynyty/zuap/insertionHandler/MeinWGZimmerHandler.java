@@ -29,7 +29,7 @@ public class MeinWGZimmerHandler extends InsertionHandler<MeinWGZimmerInsertion>
         final @NotNull Dotenv dotenv,
         final @NotNull String logPrefix
     ) {
-        super(jda, dotenv, logPrefix);
+        super(jda, dotenv, logPrefix, Long.parseLong(dotenv.get("MEINWGZIMMER_CHANNEL_ID")));
     }
 
     @Override
