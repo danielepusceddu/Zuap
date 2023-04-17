@@ -174,7 +174,7 @@ public abstract class InsertionHandler<Insertion extends de.infynyty.zuap.insert
                     "Retrying in 15 minutes.",
                 Zuap.getLogChannelId()
             );
-            TimeUnit.MINUTES.sleep(Zuap.UPDATE_DELAY_IN_MINS);
+            TimeUnit.MINUTES.sleep(Long.parseLong(dotenv.get("UPDATE_DELAY_IN_MINS")));
             parseUpdatedInsertions();
         }
     }

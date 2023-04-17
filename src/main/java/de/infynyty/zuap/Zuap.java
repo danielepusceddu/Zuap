@@ -19,9 +19,6 @@ import org.jetbrains.annotations.NotNull;
 
 @Log
 public class Zuap {
-
-    public final static int UPDATE_DELAY_IN_MINS = 5;
-
     private final static Dotenv dotenv = Dotenv.load();
 
     private final static ArrayList<InsertionHandler<? extends Insertion>> handlers = new ArrayList<>();
@@ -41,7 +38,7 @@ public class Zuap {
             while (true) {
                 try {
                     handler.updateCurrentInsertions();
-                    TimeUnit.MINUTES.sleep(UPDATE_DELAY_IN_MINS);
+                    TimeUnit.MINUTES.sleep(Long.parseLong(dotenv.get("UPDATE_DELAY_IN_MINS")));
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
