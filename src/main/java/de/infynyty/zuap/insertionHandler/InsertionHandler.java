@@ -33,7 +33,9 @@ public abstract class InsertionHandler<Insertion extends de.infynyty.zuap.insert
     @NotNull
     private final String logPrefix;
     @NotNull
-    private final long channelId;
+    private final long tenantWantedChannel;
+    @NotNull
+    private final long subtenantChannel;
 
     /**
      * Creates an insertion handler for a new website.
@@ -42,11 +44,12 @@ public abstract class InsertionHandler<Insertion extends de.infynyty.zuap.insert
      * @param dotenv     The file containing environment variables.
      * @param logPrefix
      */
-    protected InsertionHandler(@NotNull final JDA jda, @NotNull final Dotenv dotenv, @NotNull final String logPrefix, long channelId) {
+    protected InsertionHandler(@NotNull final JDA jda, @NotNull final Dotenv dotenv, @NotNull final String logPrefix, long tenantCh, long subtenCh) {
         this.jda = jda;
         this.dotenv = dotenv;
         this.logPrefix = logPrefix;
-        this.channelId = channelId;
+        this.tenantWantedChannel = tenantCh;
+        this.subtenantChannel = subtenCh;
     }
 
     /**
@@ -133,11 +136,18 @@ public abstract class InsertionHandler<Insertion extends de.infynyty.zuap.insert
         for (final Insertion updatedInsertion : updatedInsertions) {
             if (!(currentInsertions.contains(updatedInsertion))) {
                 currentInsertions.add(updatedInsertion);
-                logUpdates(
-                    Level.INFO,
-                    this.logPrefix + "new insertion found\n\n" + updatedInsertion.toString(),
-                    this.channelId
-                );
+                if(updatedInsertion.isNextTenantWanted())
+                    logUpdates(
+                        Level.INFO,
+                        this.logPrefix + "NEW TENANT WANTED:\n\n" + updatedInsertion.toString(),
+                        this.tenantWantedChannel
+                    );
+                else
+                    logUpdates(
+                        Level.INFO,
+                        this.logPrefix + "Subtenant wanted\n\n" + updatedInsertion.toString(),
+                        this.subtenantChannel
+                    );
             }
         }
     }
