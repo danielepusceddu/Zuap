@@ -139,13 +139,13 @@ public abstract class InsertionHandler<Insertion extends de.infynyty.zuap.insert
                 if(updatedInsertion.isNextTenantWanted())
                     logUpdates(
                         Level.INFO,
-                        this.logPrefix + "NEW TENANT WANTED:\n\n" + updatedInsertion.toString(),
+                        "NEW TENANT WANTED\n" + updatedInsertion.toString(),
                         this.tenantWantedChannel
                     );
                 else
                     logUpdates(
                         Level.INFO,
-                        this.logPrefix + "Subtenant wanted\n\n" + updatedInsertion.toString(),
+                        "Subtenant wanted\n" + updatedInsertion.toString(),
                         this.subtenantChannel
                     );
             }
